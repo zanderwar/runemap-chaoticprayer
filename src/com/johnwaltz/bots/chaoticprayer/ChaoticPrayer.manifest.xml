@@ -1,0 +1,24 @@
+<manifest>
+    <main-class>com.johnwaltz.bots.chaoticprayer.ChaoticPrayer</main-class>
+    <name>Chaotic Prayer</name>
+    <tag-line>The most human-like Chaos Template Prayer bot available for RuneMate</tag-line>
+    <description>Trains prayer for "Gilded Altar"-like xp in the Wilderness at the Chaos Temple at an exception speed heavily utilising antiban methodology</description>
+    <version>1.0.0</version>
+    <compatibility>
+        <game-type>RS3</game-type>
+    </compatibility>
+    <categories>
+        <category>PRAYER</category>
+    </categories>
+    <internal-id>chaoticprayer</internal-id>
+    <hidden>false</hidden> <!--If you need to hide it from the bot store for maintenance-->
+    <access>public</access>
+    <tags>
+        <tag>altar</tag>
+        <tag>prayer</tag>
+    </tags>
+    <resources>
+        <resource>com/johnwaltz/bots/chaoticprayer/ui/ChaoticPrayer.fxml</resource>
+    </resources>
+    <open-source>false</open-source>
+</manifest>

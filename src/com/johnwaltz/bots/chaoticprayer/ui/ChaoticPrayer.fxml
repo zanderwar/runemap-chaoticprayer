@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="604.0" type="javafx.scene.layout.GridPane" xmlns="http://javafx.com/javafx/8.0.131" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <Accordion prefHeight="400.0" prefWidth="604.0">
+          <panes>
+            <TitledPane animated="false" prefHeight="340.0" prefWidth="466.0" text="Basic Configuration">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="224.0" prefWidth="604.0">
+                       <children>
+                          <ComboBox fx:id="chosenBone" layoutX="221.0" layoutY="26.0" prefHeight="27.0" prefWidth="203.0" promptText="Choose a bone ..." />
+                          <Label layoutX="175.0" layoutY="31.0" text="Bone" />
+                          <CheckBox fx:id="useJujuPotions" layoutX="210.0" layoutY="102.0" mnemonicParsing="false" prefWidth="179.0" text="Use Juju Prayer Potion" />
+                          <CheckBox fx:id="useFamiliar" layoutX="210.0" layoutY="124.0" mnemonicParsing="false" prefWidth="179.0" text="Use Familiar" />
+                          <ComboBox fx:id="chosenFamiliar" disable="true" layoutX="210.0" layoutY="146.0" prefHeight="27.0" prefWidth="179.0" promptText="Select a Familiar ..." />
+                          <CheckBox fx:id="useSummoningPotions" disable="true" layoutX="210.0" layoutY="181.0" mnemonicParsing="false" prefWidth="179.0" text="Use Summoning Potions" />
+                          <Button fx:id="actionStartButton" disable="true" layoutX="239.0" layoutY="213.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" text="Start" />
+                        <ComboBox fx:id="bankPreset" layoutX="221.0" layoutY="61.0" prefHeight="27.0" prefWidth="203.0" promptText="Choose one ..." />
+                        <Label layoutX="133.0" layoutY="66.0" text="Bank Preset" />
+                       </children></AnchorPane>
+              </content>
+            </TitledPane>
+            <TitledPane animated="false" expanded="false" text="Statistics">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                       <children>
+                          <TableView fx:id="statisticsTable" layoutX="-1.0" layoutY="58.0" prefHeight="260.0" prefWidth="600.0">
+                            <columns>
+                              <TableColumn fx:id="statisticsKeyColumn" prefWidth="300.0" text="Key" />
+                              <TableColumn fx:id="statisticsValueColumn" prefWidth="300.0" text="Value" />
+                            </columns>
+                          </TableView>
+                        <Label layoutX="36.0" layoutY="23.0" text="Current Task:" />
+                        <Label fx:id="currentTaskLabel" layoutX="127.0" layoutY="23.0" text="Initiating..." />
+                       </children></AnchorPane>
+              </content>
+            </TitledPane>
+            <TitledPane animated="false" expanded="false" text="Antiban / AntiPK">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                       <children>
+                          <TabPane layoutX="-1.0" layoutY="-1.0" prefHeight="319.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
+                            <tabs>
+                              <Tab text="Interaction">
+                                <content>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                         <children>
+                                            <CheckBox layoutX="14.0" layoutY="37.0" mnemonicParsing="false" text="Move Camera" />
+                                            <CheckBox layoutX="14.0" layoutY="59.0" mnemonicParsing="false" text="Hover Skill Bubble" />
+                                            <CheckBox layoutX="14.0" layoutY="15.0" mnemonicParsing="false" text="Use on Random Bone" />
+                                         </children>
+                                      </AnchorPane>
+                                </content>
+                              </Tab>
+                              <Tab text="Break Handler">
+                                <content>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="235.0" prefWidth="600.0">
+                                         <children>
+                                            <TableView fx:id="breakHandlerTable" prefHeight="236.0" prefWidth="600.0">
+                                              <columns>
+                                                <TableColumn fx:id="breakHandlerStartColumn" prefWidth="150.0" text="Start" />
+                                                <TableColumn fx:id="breakHandlerEndColumn" prefWidth="150.0" text="End" />
+                                                  <TableColumn fx:id="breakHandlerPlayColumn" prefWidth="150.0" text="Play Time" />
+                                                  <TableColumn fx:id="breakHandlerIdleColumn" prefWidth="150.0" text="Idle Time" />
+                                              </columns>
+                                            </TableView>
+                                            <Button fx:id="actionGenerateTimetable" layoutX="146.0" layoutY="240.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="309.0" text="Generate Timetable" />
+                                         </children>
+                                      </AnchorPane>
+                                </content>
+                              </Tab>
+                                <Tab text="Anti PK">
+                                  <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                         <children>
+                                            <CheckBox fx:id="runToSafetyAndHop" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="Run to safety and world hop" />
+                                            <ListView fx:id="hopList" disable="true" layoutX="326.0" layoutY="42.0" prefHeight="233.0" prefWidth="258.0" />
+                                            <TextField fx:id="editableAddWorld" disable="true" layoutX="326.0" layoutY="10.0" prefHeight="27.0" prefWidth="202.0" promptText="Add a world ... (eg 12)" />
+                                            <Button fx:id="actionAddWorld" disable="true" layoutX="531.0" layoutY="10.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="53.0" text="Add" />
+                                            <Label layoutX="14.0" layoutY="49.0" text="On Death I should:" />
+                                            <RadioButton fx:id="onDeathLogout" layoutX="21.0" layoutY="72.0" mnemonicParsing="false" text="Log out">
+                                               <toggleGroup>
+                                                  <ToggleGroup fx:id="OnDeathAction" />
+                                               </toggleGroup>
+                                            </RadioButton>
+                                            <RadioButton fx:id="onDeathReturnToAltar" layoutX="21.0" layoutY="94.0" mnemonicParsing="false" text="Return to Altar" toggleGroup="$OnDeathAction" />
+                                            <RadioButton fx:id="onDeathHopAndReturn" disable="true" layoutX="21.0" layoutY="116.0" mnemonicParsing="false" text="Hop Worlds and Return to Altar" toggleGroup="$OnDeathAction" />
+                                         </children>
+                                      </AnchorPane>
+                                  </content>
+                                </Tab>
+                            </tabs>
+                          </TabPane>
+                       </children>
+                </AnchorPane>
+              </content>
+            </TitledPane>
+          </panes>
+        </Accordion>
+    </children>
+   <columnConstraints>
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+   </rowConstraints>
+</fx:root>
