@@ -2,37 +2,36 @@ package com.johnwaltz.bots.chaoticprayer.branches;
 
 import com.johnwaltz.bots.chaoticprayer.ChaoticPrayer;
 import com.johnwaltz.bots.chaoticprayer.leafs.EmptyLeaf;
-import com.runemate.game.api.hybrid.region.Players;
 import com.runemate.game.api.script.framework.tree.BranchTask;
 import com.runemate.game.api.script.framework.tree.TreeTask;
 
 /**
- * Created by reece on 3/06/2017.
+ *
  */
-public class Root extends BranchTask {
+public class RootBranch extends BranchTask {
     private ChaoticPrayer bot;
+    private EmptyLeaf emptyLeaf = new EmptyLeaf();
+    private IsNearby isNearby;
 
-    public Root(ChaoticPrayer bot) {
+    public RootBranch(ChaoticPrayer bot) {
         this.bot = bot;
+        this.isNearby = new IsNearby(bot);
     }
 
     @Override
     public TreeTask successTask() {
-        return new EmptyLeaf();
-    }
-
-    @Override
-    public boolean validate() {
-        bot.currentTask = "Waiting on GUI";
-        bot.updateInfo();
-        return bot.guiWait;
+        return emptyLeaf;
     }
 
     @Override
     public TreeTask failureTask() {
-        bot.player = Players.getLocal();
-        bot.updateInfo();
+        return isNearby;
+    }
 
-        return new IsNearby(bot);
+    @Override
+    public boolean validate() {
+        bot.updateCurrentTask("Waiting on GUI");
+
+        return bot.guiWait;
     }
 }

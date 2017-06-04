@@ -5,7 +5,8 @@ package com.johnwaltz.bots.chaoticprayer.ui;
  */
 public class Info
 {
-    public int bonePh, boneCount;
+    public int bonePh, boneCount, levelsGained;
+    public double xpPh;
     public String runTime, currentTask;
 
     /**
@@ -16,6 +17,7 @@ public class Info
         this.boneCount = 0;
         this.runTime = "";
         this.currentTask = "";
+        this.xpPh = 0;
     }
 
     /**
@@ -24,11 +26,13 @@ public class Info
      * @param runTime
      * @param currentTask
      */
-    public Info(int bonePh, int boneCount, String runTime, String currentTask)
+    public Info(int bonePh, int boneCount, String runTime, String currentTask, double xpPh, int levelsGained)
     {
         this.bonePh = bonePh;
         this.boneCount = boneCount;
         this.runTime = runTime;
         this.currentTask = currentTask;
+        this.xpPh = xpPh;
+        this.levelsGained = levelsGained;
     }
 }

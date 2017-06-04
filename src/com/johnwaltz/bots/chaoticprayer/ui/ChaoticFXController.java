@@ -1,39 +1,45 @@
 package com.johnwaltz.bots.chaoticprayer.ui;
 
 import com.johnwaltz.bots.chaoticprayer.ChaoticPrayer;
+import com.runemate.game.api.hybrid.input.Mouse;
+import com.runemate.game.api.hybrid.util.Resources;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 /**
  * Chaotic Prayer FX Controller
  */
-public class ChaoticFXController implements Initializable {
+public class ChaoticFXController extends GridPane implements Initializable {
     @FXML
-    private ComboBox chosenBone;
-
-    @FXML
-    private ComboBox chosenPreset;
+    private ComboBox chosenBone, chosenPreset, chosenFamiliar;
 
     @FXML
     private CheckBox useFamiliar;
 
     @FXML
-    private ComboBox chosenFamiliar;
-
-    @FXML
     private Button actionStartButton;
 
     @FXML
-    private Label currentTaskLabel;
+    private Label currentTaskLabel, runtimeLabel;
+
+    @FXML
+    private Slider speedMultiplierSlider;
+
+    @FXML
+    private TextField speedMultiplierValue;
+
 
     /**
      * The bot instance
@@ -47,6 +53,19 @@ public class ChaoticFXController implements Initializable {
      */
     public ChaoticFXController(ChaoticPrayer bot) {
         this.bot = bot;
+
+        FXMLLoader loader = new FXMLLoader();
+
+        Future<InputStream> stream = bot.getPlatform().invokeLater(() -> Resources.getAsStream("com/johnwaltz/bots/chaoticprayer/ui/ChaoticPrayer.fxml"));
+        loader.setController(this);
+        loader.setRoot(this);
+
+        try {
+            loader.load(stream.get());
+        } catch (IOException | InterruptedException | ExecutionException e) {
+            System.err.println("Error loading GUI");
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -94,8 +113,15 @@ public class ChaoticFXController implements Initializable {
 
         chosenPreset.setOnAction(eventChosenPresetComboBox());
         useFamiliar.setOnAction(eventUseFamiliarCheckBox());
+        chosenFamiliar.setOnAction(eventChosenFamiliarComboxBox());
         chosenBone.setOnAction(eventChosenBoneComboxBox());
         actionStartButton.setOnAction(eventStart());
+    }
+
+    private EventHandler<ActionEvent> eventChosenFamiliarComboxBox() {
+        return event -> {
+            actionStartButton.setDisable(!isBotReady());
+        };
     }
 
     private EventHandler<ActionEvent> eventChosenPresetComboBox() {
@@ -117,6 +143,14 @@ public class ChaoticFXController implements Initializable {
     public EventHandler<ActionEvent> eventStart() {
         return event -> {
             try {
+                Mouse.setSpeedMultiplier(speedMultiplierSlider.getValue());
+                if (useFamiliar.isSelected()) {
+                    bot.useFamiliar = true;
+                    bot.chosenFamiliar = chosenFamiliar.getSelectionModel().getSelectedItem().toString();
+                } else {
+                    bot.useFamiliar = false;
+                    bot.chosenFamiliar = null;
+                }
                 bot.chosenBone = chosenBone.getSelectionModel().getSelectedItem().toString();
                 bot.chosenPreset = chosenPreset.getSelectionModel().getSelectedItem().toString();
             } catch (Exception e) {
@@ -134,10 +168,6 @@ public class ChaoticFXController implements Initializable {
         };
     }
 
-    private void disableStartButton(boolean state) {
-        actionStartButton.setDisable(false);
-    }
-
     private boolean isBotReady() {
         boolean ready = true;
 
@@ -149,16 +179,19 @@ public class ChaoticFXController implements Initializable {
             ready = false;
         }
 
-        if (useFamiliar.isSelected() && chosenFamiliar.getSelectionModel().getSelectedItem() == null) {
+        if (!useFamiliar.isSelected() || useFamiliar.isSelected() && chosenFamiliar.getSelectionModel().getSelectedItem() == null) {
             ready = false;
         }
 
         return ready;
     }
 
-    public void update() {
+    public void updateInfo() {
         Info i = bot.info;
 
-        currentTaskLabel.textProperty().set("" + i.currentTask);
+        if (i != null) {
+            currentTaskLabel.setText(i.currentTask);
+            runtimeLabel.setText(i.runTime);
+        }
     }
 }

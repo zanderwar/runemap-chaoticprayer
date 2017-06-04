@@ -7,6 +7,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
@@ -34,7 +35,7 @@
                           <ComboBox fx:id="chosenFamiliar" disable="true" layoutX="210.0" layoutY="146.0" prefHeight="27.0" prefWidth="179.0" promptText="Select a Familiar ..." />
                           <CheckBox fx:id="useSummoningPotions" disable="true" layoutX="210.0" layoutY="181.0" mnemonicParsing="false" prefWidth="179.0" text="Use Summoning Potions" />
                           <Button fx:id="actionStartButton" disable="true" layoutX="239.0" layoutY="213.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" text="Start" />
-                        <ComboBox fx:id="bankPreset" layoutX="221.0" layoutY="61.0" prefHeight="27.0" prefWidth="203.0" promptText="Choose one ..." />
+                        <ComboBox fx:id="chosenPreset" layoutX="221.0" layoutY="61.0" prefHeight="27.0" prefWidth="203.0" promptText="Choose one ..." />
                         <Label layoutX="133.0" layoutY="66.0" text="Bank Preset" />
                        </children></AnchorPane>
               </content>
@@ -42,16 +43,12 @@
             <TitledPane animated="false" expanded="false" text="Statistics">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                       <children>
-                          <TableView fx:id="statisticsTable" layoutX="-1.0" layoutY="58.0" prefHeight="260.0" prefWidth="600.0">
-                            <columns>
-                              <TableColumn fx:id="statisticsKeyColumn" prefWidth="300.0" text="Key" />
-                              <TableColumn fx:id="statisticsValueColumn" prefWidth="300.0" text="Value" />
-                            </columns>
-                          </TableView>
-                        <Label layoutX="36.0" layoutY="23.0" text="Current Task:" />
-                        <Label fx:id="currentTaskLabel" layoutX="127.0" layoutY="23.0" text="Initiating..." />
-                       </children></AnchorPane>
+                     <children>
+                        <Label layoutX="34.0" layoutY="25.0" text="Current Task:" />
+                        <Label fx:id="currentTaskLabel" layoutX="138.0" layoutY="25.0" text="Initiating..." />
+                        <Label layoutX="34.0" layoutY="42.0" text="Runtime" />
+                        <Label fx:id="runtimeLabel" layoutX="138.0" layoutY="44.0" text="Initiating..." />
+                     </children></AnchorPane>
               </content>
             </TitledPane>
             <TitledPane animated="false" expanded="false" text="Antiban / AntiPK">
@@ -67,6 +64,9 @@
                                             <CheckBox layoutX="14.0" layoutY="37.0" mnemonicParsing="false" text="Move Camera" />
                                             <CheckBox layoutX="14.0" layoutY="59.0" mnemonicParsing="false" text="Hover Skill Bubble" />
                                             <CheckBox layoutX="14.0" layoutY="15.0" mnemonicParsing="false" text="Use on Random Bone" />
+                                          <Slider fx:id="speedMultiplierSlider" blockIncrement="0.1" layoutX="17.0" layoutY="115.0" max="10.0" min="1.0" prefHeight="16.0" prefWidth="161.0" value="1.5" />
+                                          <Label layoutX="16.0" layoutY="90.0" text="Mouse Multiplier" />
+                                          <TextField fx:id="mouseMultiplierValue" disable="true" layoutX="133.0" layoutY="85.0" prefHeight="27.0" prefWidth="38.0" text="1.5" />
                                          </children>
                                       </AnchorPane>
                                 </content>
